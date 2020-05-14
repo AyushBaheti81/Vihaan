@@ -1,0 +1,59 @@
+WindowManager:
+    MainWindow:
+    SecondWindow:
+    ThirdWindow:
+    CameraClick:
+
+<MainWindow>:
+    name: "main"
+    GridLayout:
+        cols:1
+
+        Button:
+            text: "TextToSpeech"
+            on_release:
+                app.root.current = "third"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Detection"
+            on_release:
+                app.root.current = "camera"
+                root.manager.transition.direction = "left"
+
+
+<SecondWindow>:
+    name: "second"
+
+    Button:
+        text: "Go Back"
+        on_release:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
+
+<CameraClick>:
+    name: "camera"
+    orientation: 'vertical'
+    Camera:
+        id: camera
+        resolution: (640, 480)
+        play: False
+    ToggleButton:
+        text: 'Play'
+        on_press: camera.play = not camera.play
+        size_hint_y: None
+        height: '48dp'
+    Button:
+        text: 'Capture'
+        size_hint_y: None
+        height: '48dp'
+        on_press: root.capture()
+
+<ThirdWindow>:
+    name: "third"
+
+    Button:
+        text: "Go Back"
+        on_release:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
