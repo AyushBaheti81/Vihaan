@@ -1,30 +1,20 @@
 import time
 import os
-from kivy.app import App
-from kivy.lang import Builder
-from kivy.properties import ObjectProperty
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import ScreenManager, Screen
-
 import t2s
 
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 class MainWindow(Screen):
     pass
 
-
-class SecondWindow(Screen):
+class T2SFileExplorer(Screen):
     def load(self, path, filename):
         t2s.convertAudio(os.path.join(path, filename[0]))
 
-
-
-
-class WindowManager(ScreenManager):
-    pass
-
-
-class CameraClick(BoxLayout, Screen):
+class CameraClickForT2S(BoxLayout, Screen):
     def capture(self):
         '''
         Function to capture the images and give them the names
@@ -36,6 +26,15 @@ class CameraClick(BoxLayout, Screen):
         camera.export_to_png(clickedPhoto)
         t2s.convertAudio(clickedPhoto)
         print("Captured")
+
+class YoloWindowCamera(BoxLayout, Screen):
+    pass
+
+class YoloWindowFileExplorer(Screen):
+    pass
+
+class WindowManager(ScreenManager):
+    pass
 
 kv = Builder.load_file("my.kv")
 

@@ -1,7 +1,9 @@
 WindowManager:
     MainWindow:
-    SecondWindow:
-    CameraClick:
+    T2SFileExplorer:
+    CameraClickForT2S:
+    YoloWindowCamera:
+    YoloWindowFileExplorer:
 
 <MainWindow>:
     name: "main"
@@ -15,13 +17,42 @@ WindowManager:
                 root.manager.transition.direction = "left"
 
         Button:
-            text: "Detection"
+            text: "Object Detection"
             on_release:
-                app.root.current = "camera"
+                app.root.current = "yoloWindow"
                 root.manager.transition.direction = "left"
 
+<CameraClickForT2S>:
+    name: "camera"
+    orientation: 'vertical'
+    Camera:
+        id: camera
+        resolution: (640, 480)
+        play: True
 
-<SecondWindow>:
+    Button:
+        text: 'Load File'
+        size_hint_y: None
+        height: '48dp'
+        on_press:
+            app.root.current = "fileLoader"
+
+    Button:
+        text: 'Capture'
+        size_hint_y: None
+        height: '48dp'
+        on_press:
+            app.root.current = "main"
+
+    Button:
+        text: 'Go back'
+        on_press:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
+        size_hint_y: None
+        height: '48dp'
+
+<T2SFileExplorer>:
     name: "fileLoader"
 
     BoxLayout:
@@ -43,10 +74,10 @@ WindowManager:
                 text: "Load File"
                 on_press:
                     root.load(filechooser.path, filechooser.selection)
+                    app.root.current = "main"
 
-
-<CameraClick>:
-    name: "camera"
+<YoloWindowCamera>:
+    name: "yoloWindow"
     orientation: 'vertical'
     Camera:
         id: camera
@@ -58,19 +89,43 @@ WindowManager:
         size_hint_y: None
         height: '48dp'
         on_press:
-            app.root.current = "fileLoader"
+            app.root.current = "YoloFileLoader"
 
     Button:
         text: 'Capture'
         size_hint_y: None
         height: '48dp'
-        on_press: root.capture()
+        on_press:
+            app.root.current = "main"
 
     Button:
         text: 'Go back'
+        height: '48dp'
         on_press:
             app.root.current = "main"
             root.manager.transition.direction = "right"
         size_hint_y: None
-        height: '48dp'
 
+<YoloWindowFileExplorer>:
+    name: "YoloFileLoader"
+
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_press:
+                    app.root.current = "camera"
+
+            Button:
+                text: "Load File"
+                on_press:
+                    root.load(filechooser.path, filechooser.selection)
+                    app.root.current = "main"
