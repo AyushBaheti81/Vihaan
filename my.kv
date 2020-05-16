@@ -1,7 +1,6 @@
 WindowManager:
     MainWindow:
     SecondWindow:
-    ThirdWindow:
     CameraClick:
 
 <MainWindow>:
@@ -12,7 +11,7 @@ WindowManager:
         Button:
             text: "TextToSpeech"
             on_release:
-                app.root.current = "third"
+                app.root.current = "camera"
                 root.manager.transition.direction = "left"
 
         Button:
@@ -37,23 +36,19 @@ WindowManager:
     Camera:
         id: camera
         resolution: (640, 480)
-        play: False
-    ToggleButton:
-        text: 'Play'
-        on_press: camera.play = not camera.play
-        size_hint_y: None
-        height: '48dp'
+        play: True
+
     Button:
         text: 'Capture'
         size_hint_y: None
         height: '48dp'
         on_press: root.capture()
 
-<ThirdWindow>:
-    name: "third"
-
     Button:
-        text: "Go Back"
-        on_release:
+        text: 'Go back'
+        on_press:
             app.root.current = "main"
             root.manager.transition.direction = "right"
+        size_hint_y: None
+        height: '48dp'
+
