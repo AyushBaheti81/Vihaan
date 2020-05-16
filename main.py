@@ -1,7 +1,8 @@
 import time
-
+import os
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 
@@ -13,7 +14,10 @@ class MainWindow(Screen):
 
 
 class SecondWindow(Screen):
-    pass
+    def load(self, path, filename):
+        t2s.convertAudio(os.path.join(path, filename[0]))
+
+
 
 
 class WindowManager(ScreenManager):

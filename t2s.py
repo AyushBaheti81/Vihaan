@@ -20,7 +20,7 @@ def onEnd(name, completed):
 
 def convertAudio(file):
     if(file.endswith('pdf')):
-        PDF_file = "/Users/ayushs/Desktop/RapGod.pdf"
+        PDF_file = file
         ''' 
         Part #1 : Converting PDF to images 
         '''
@@ -64,7 +64,7 @@ def convertAudio(file):
 
         engine = pyttsx3.init()
 
-        engine.connect('started-utterance', onStart)
+        token = engine.connect('started-utterance', onStart)
         engine.connect('started-word', onWord)
         engine.connect('finished-utterance', onEnd)
         # Iterate from 1 to total number of pages
@@ -94,9 +94,11 @@ def convertAudio(file):
             engine.runAndWait()
             # Finally, write the processed text to the file.
             f.write(text)
+            engine.disconnect(token)
 
         # Close the file after writing all the text.
         f.close()
+
     elif(imghdr.what(file) == 'jpeg'):
         # Creating a text file to write the output
         outfile = "out_text.txt"
@@ -106,6 +108,9 @@ def convertAudio(file):
         f = open(outfile, "a")
         text = str(((pytesseract.image_to_string(Image.open(file)))))
         engine = pyttsx3.init()
+        token = engine.connect('started-utterance', onStart)
+        engine.connect('started-word', onWord)
+        engine.connect('finished-utterance', onEnd)
         # The recognized text is stored in variable text
         # Any string processing may be applied on text
         # Here, basic formatting has been done:
@@ -123,4 +128,5 @@ def convertAudio(file):
         f.close()
         engine.say(text)
         engine.runAndWait()
+        engine.disconnect(token)
 

@@ -22,13 +22,28 @@ WindowManager:
 
 
 <SecondWindow>:
-    name: "second"
+    name: "fileLoader"
 
-    Button:
-        text: "Go Back"
-        on_release:
-            app.root.current = "main"
-            root.manager.transition.direction = "right"
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_press:
+                    app.root.current = "camera"
+
+            Button:
+                text: "Load File"
+                on_press:
+                    root.load(filechooser.path, filechooser.selection)
+
 
 <CameraClick>:
     name: "camera"
@@ -37,6 +52,13 @@ WindowManager:
         id: camera
         resolution: (640, 480)
         play: True
+
+    Button:
+        text: 'Load File'
+        size_hint_y: None
+        height: '48dp'
+        on_press:
+            app.root.current = "fileLoader"
 
     Button:
         text: 'Capture'
