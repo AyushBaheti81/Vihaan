@@ -1,11 +1,14 @@
 import time
 import os
 import t2s
+import yolo
 
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
+
+
 
 class MainWindow(Screen):
     pass
@@ -31,7 +34,8 @@ class YoloWindowCamera(BoxLayout, Screen):
     pass
 
 class YoloWindowFileExplorer(Screen):
-    pass
+    def load(self, path, filename):
+        yolo.detectObjects()
 
 class WindowManager(ScreenManager):
     pass
