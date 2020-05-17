@@ -80,7 +80,7 @@ WindowManager:
     name: "yoloWindow"
     orientation: 'vertical'
     Camera:
-        id: camera
+        id: yolocamera
         resolution: (640, 480)
         play: True
 
@@ -95,8 +95,7 @@ WindowManager:
         text: 'Capture'
         size_hint_y: None
         height: '48dp'
-        on_press:
-            app.root.current = "main"
+        on_press: root.capture()
 
     Button:
         text: 'Go back'

@@ -31,7 +31,13 @@ class CameraClickForT2S(BoxLayout, Screen):
         print("Captured")
 
 class YoloWindowCamera(BoxLayout, Screen):
-    pass
+    def capture(self):
+        camera = self.ids['yolocamera']
+        timestr = time.strftime("%Y%m%d_%H%M%S")
+        clickedPhoto = "IMG_{}.jpg".format(timestr)
+        camera.export_to_png(clickedPhoto)
+        yolo.detectObjects(clickedPhoto)
+
 
 class YoloWindowFileExplorer(Screen):
     def load(self, path, filename):
