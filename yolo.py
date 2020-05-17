@@ -22,9 +22,9 @@ import os
 #                 help="object you are looking for")
 # args = vars(ap.parse_args())
 
-def detectObjects():
+def detectObjects(imageFilePath):
     yoloFilePath = "/Users/ayushs/PycharmProjects/FinalProject/yolo-object-detection/yolo-coco"
-    imageFilePath = "/Users/ayushs/PycharmProjects/FinalProject/yolo-object-detection/images/baggage_claim.jpg"
+    #imageFilePath = "/Users/ayushs/PycharmProjects/FinalProject/yolo-object-detection/images/baggage_claim.jpg"
     confidenceValue = 0.5
     thresholdValue = 0.3
     find = "person"

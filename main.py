@@ -35,7 +35,9 @@ class YoloWindowCamera(BoxLayout, Screen):
 
 class YoloWindowFileExplorer(Screen):
     def load(self, path, filename):
-        yolo.detectObjects()
+        imageFile = os.path.join(path, filename[0])
+        yolo.detectObjects(imageFile)
+
 
 class WindowManager(ScreenManager):
     pass
